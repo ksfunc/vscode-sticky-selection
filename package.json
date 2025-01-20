@@ -1,11 +1,11 @@
 {
-  "publisher": "ksfunc",
   "name": "vscode-sticky-selection",
-  "displayName": "Sticky Selection",
-  "description": "sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs",
   "version": "1.0.0",
-  "license": "MIT",
   "icon": "images/icon.png",
+  "displayName": "Sticky Selection",
+  "description": "\"Sticky Selection\" mode (similar to the \"Region\" in Emacs) that supports multiple cursors and multiple tabs",
+  "license": "MIT",
+  "publisher": "ksfunc",
   "repository": {
     "type": "git",
     "url": "https://github.com/ksfunc/vscode-sticky-selection"
@@ -17,7 +17,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -31,8 +31,8 @@
         "title": "Exit Sticky Selection Mode"
       },
       {
-        "command": "sticky-selection.exitStickySelectionModeWithSelectionKeeped",
-        "title": "Exit Sticky Selection Mode With Selection Keeped"
+        "command": "sticky-selection.exitStickySelectionModeWhilePreservingSelection",
+        "title": "Exit Sticky Selection Mode while Preserving Selection"
       }
     ],
     "keybindings": [
@@ -47,8 +47,8 @@
         "when": "editorTextFocus && !editorHasMultipleSelections && inStickySelectionMode"
       },
       {
-        "key": "down",
-        "command": "cursorDownSelect",
+        "key": "right",
+        "command": "cursorRightSelect",
         "when": "editorTextFocus && inStickySelectionMode"
       },
       {
@@ -57,8 +57,8 @@
         "when": "editorTextFocus && inStickySelectionMode"
       },
       {
-        "key": "right",
-        "command": "cursorRightSelect",
+        "key": "down",
+        "command": "cursorDownSelect",
         "when": "editorTextFocus && inStickySelectionMode"
       },
       {
@@ -67,8 +67,8 @@
         "when": "editorTextFocus && inStickySelectionMode"
       },
       {
-        "key": "ctrl+n",
-        "command": "cursorDownSelect",
+        "key": "ctrl+f",
+        "command": "cursorRightSelect",
         "when": "editorTextFocus && inStickySelectionMode && isMac"
       },
       {
@@ -77,8 +77,8 @@
         "when": "editorTextFocus && inStickySelectionMode && isMac"
       },
       {
-        "key": "ctrl+f",
-        "command": "cursorRightSelect",
+        "key": "ctrl+n",
+        "command": "cursorDownSelect",
         "when": "editorTextFocus && inStickySelectionMode && isMac"
       },
       {

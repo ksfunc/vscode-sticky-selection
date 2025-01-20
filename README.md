@@ -1,49 +1,49 @@
-# vscode-sticky-selection README
+# vscode-sticky-selection
 
-This extension provides sticky-selection (region in Emacs) that supports multiple cursors and multiple tabs.
+This extension provides a "Sticky Selection" mode (similar to the "Region" in Emacs) that supports multiple cursors and multiple tabs.
 
-## Extension Commands
+## Commands
 
-This extension contributes the following commands:
+This extension provides the following commands:
 
-- `sticky-selection.enterStickySelectionMode`: Enter sticky-selection-mode
-- `sticky-selection.exitStickySelectionMode`: Exit sticky-selection-mode
-- `sticky-selection.exitStickySelectionModeWithSelectionKeeped`: Exit sticky-selection-mode with selection keeped
+- `sticky-selection.enterStickySelectionMode`: Enter Sticky Selection mode.
+- `sticky-selection.exitStickySelectionMode`: Exit Sticky Selection mode.
+- `sticky-selection.exitStickySelectionModeWhilePreservingSelection`: Exit Sticky Selection mode while preserving the current selection.
 
-## Extension Keybindings
+## Keybindings
 
-This extension contributes the following keybindings:
+This extension provides the following keybindings:
 
-| Key            | Description                                                                       | OS      |
-| -------------- | --------------------------------------------------------------------------------- | ------- |
-| ctrl+space     | Enter sticky-selection-mode                                                       |         |
-| escape         | Exit sticky-selection-mode if the editor does not have multiple selections        |         |
-| down           | Execute `cursorDownSelect` if the controller is in sticky-selection-mode          |         |
-| left           | Execute `cursorLeftSelect` if the controller is in sticky-selection-mode          |         |
-| right          | Execute `cursorRightSelect` if the controller is in sticky-selection-mode         |         |
-| up             | Execute `cursorUpSelect` if the controller is in sticky-selection-mode            |         |
-| ctrl+n         | Execute `cursorDownSelect` if the controller is in sticky-selection-mode          | macOS   |
-| ctrl+b         | Execute `cursorLeftSelect` if the controller is in sticky-selection-mode          | macOS   |
-| ctrl+f         | Execute `cursorRightSelect` if the controller is in sticky-selection-mode         | macOS   |
-| ctrl+p         | Execute `cursorUpSelect` if the controller is in sticky-selection-mode            | macOS   |
-| end            | Execute `cursorEndSelect` if the controller is in sticky-selection-mode           |         |
-| home           | Execute `cursorHomeSelect` if the controller is in sticky-selection-mode          |         |
-| cmd+right      | Execute `cursorEndSelect` if the controller is in sticky-selection-mode           | macOS   |
-| cmd+left       | Execute `cursorHomeSelect` if the controller is in sticky-selection-mode          | macOS   |
-| ctrl+e         | Execute `cursorLineEndSelect` if the controller is in sticky-selection-mode       | macOS   |
-| ctrl+a         | Execute `cursorLineStartSelect` if the controller is in sticky-selection-mode     | macOS   |
-| ctrl+end       | Execute `cursorBottomSelect` if the controller is in sticky-selection-mode        | Windows |
-| ctrl+home      | Execute `cursorTopSelect` if the controller is in sticky-selection-mode           | Windows |
-| cmd+down       | Execute `cursorBottomSelect` if the controller is in sticky-selection-mode        | macOS   |
-| cmd+up         | Execute `cursorTopSelect` if the controller is in sticky-selection-mode           | macOS   |
-| pagedown       | Execute `cursorPageDownSelect` if the controller is in sticky-selection-mode      |         |
-| pageup         | Execute `cursorPageUpSelect` if the controller is in sticky-selection-mode        |         |
-| alt+right      | Execute `cursorWordEndRightSelect` if the controller is in sticky-selection-mode  | macOS   |
-| alt+left       | Execute `cursorWordLeftSelect` if the controller is in sticky-selection-mode      | macOS   |
-| ctrl+alt+right | Execute `cursorWordPartRightSelect` if the controller is in sticky-selection-mode | macOS   |
-| ctrl+alt+left  | Execute `cursorWordPartLeftSelect` if the controller is in sticky-selection-mode  | macOS   |
+| Key              | Description                                                        | OS      |
+| ---------------- | ------------------------------------------------------------------ | ------- |
+| `ctrl+space`     | Enter Sticky Selection mode.                                       |         |
+| `escape`         | Exit Sticky Selection mode if there are no multiple selections.    |         |
+| `right`          | Execute `cursorRightSelect` when in Sticky Selection mode.         |         |
+| `left`           | Execute `cursorLeftSelect` when in Sticky Selection mode.          |         |
+| `down`           | Execute `cursorDownSelect` when in Sticky Selection mode.          |         |
+| `up`             | Execute `cursorUpSelect` when in Sticky Selection mode.            |         |
+| `ctrl+f`         | Execute `cursorRightSelect` when in Sticky Selection mode.         | macOS   |
+| `ctrl+b`         | Execute `cursorLeftSelect` when in Sticky Selection mode.          | macOS   |
+| `ctrl+n`         | Execute `cursorDownSelect` when in Sticky Selection mode.          | macOS   |
+| `ctrl+p`         | Execute `cursorUpSelect` when in Sticky Selection mode.            | macOS   |
+| `end`            | Execute `cursorEndSelect` when in Sticky Selection mode.           |         |
+| `home`           | Execute `cursorHomeSelect` when in Sticky Selection mode.          |         |
+| `cmd+right`      | Execute `cursorEndSelect` when in Sticky Selection mode.           | macOS   |
+| `cmd+left`       | Execute `cursorHomeSelect` when in Sticky Selection mode.          | macOS   |
+| `ctrl+e`         | Execute `cursorLineEndSelect` when in Sticky Selection mode.       | macOS   |
+| `ctrl+a`         | Execute `cursorLineStartSelect` when in Sticky Selection mode.     | macOS   |
+| `ctrl+end`       | Execute `cursorBottomSelect` when in Sticky Selection mode.        | Windows |
+| `ctrl+home`      | Execute `cursorTopSelect` when in Sticky Selection mode.           | Windows |
+| `cmd+down`       | Execute `cursorBottomSelect` when in Sticky Selection mode.        | macOS   |
+| `cmd+up`         | Execute `cursorTopSelect` when in Sticky Selection mode.           | macOS   |
+| `pagedown`       | Execute `cursorPageDownSelect` when in Sticky Selection mode.      |         |
+| `pageup`         | Execute `cursorPageUpSelect` when in Sticky Selection mode.        |         |
+| `alt+right`      | Execute `cursorWordEndRightSelect` when in Sticky Selection mode.  | macOS   |
+| `alt+left`       | Execute `cursorWordLeftSelect` when in Sticky Selection mode.      | macOS   |
+| `ctrl+alt+right` | Execute `cursorWordPartRightSelect` when in Sticky Selection mode. | macOS   |
+| `ctrl+alt+left`  | Execute `cursorWordPartLeftSelect` when in Sticky Selection mode.  | macOS   |
 
-If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by editing `keybindings.json` as follows:
+If you're an Emacs user, you can enable `ctrl+v` and `alt+v` to work with the page-down and page-up actions by modifying your `keybindings.json` as follows:
 
 ```json
 [
@@ -53,14 +53,14 @@ If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by ed
     "when": "textInputFocus"
   },
   {
-    "key": "alt+v",
-    "command": "cursorPageUp",
-    "when": "textInputFocus"
-  },
-  {
     "key": "ctrl+v",
     "command": "cursorPageDownSelect",
     "when": "editorTextFocus && inStickySelectionMode"
+  },
+  {
+    "key": "alt+v",
+    "command": "cursorPageUp",
+    "when": "textInputFocus"
   },
   {
     "key": "alt+v",
@@ -70,9 +70,9 @@ If you are an Emacs user, you can enable the mode for `ctrl+v` and `alt+v` by ed
 ]
 ```
 
-In such manners, you can support other move commands including those of third parties.
+In this way, you can also support other movement commands, including those from third-party extensions.
 
-By default, sticky-selection-mode continues even if you execute commands such as cut and paste. You can exit the mode after execution by taking these commands as arguments to `sticky-selection.exitStickySelectionMode` as follows:
+By default, Sticky Selection mode remains active even when performing actions like cut and paste. You can exit the mode after these actions by passing them as arguments to the `sticky-selection.exitStickySelectionMode` command, as shown below:
 
 ```json
 [
@@ -106,4 +106,4 @@ By default, sticky-selection-mode continues even if you execute commands such as
 ]
 ```
 
-In such manners, you can support other commands such as `backspace` and `delete`.
+Similarly, you can set up other commands, such as `backspace` and `delete`, to exit Sticky Selection mode.
