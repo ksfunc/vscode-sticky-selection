@@ -1,11 +1,9 @@
 .vscode/**
-.vscode-test/**
 out/test/**
 src/**
 .gitignore
-vsc-extension-quickstart.md
-**/tsconfig.json
-**/.eslintrc.json
-**/.prettierrc
-**/*.map
 **/*.ts
+**/*.map
+**/.eslintrc.json
+**/.prettierrc.json
+**/tsconfig.json

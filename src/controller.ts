@@ -64,6 +64,7 @@ export class Controller {
     await this.ensureContext();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async type(args: any) {
     await vscode.commands.executeCommand("default:type", args);
 
