@@ -1,6 +1,6 @@
 # vscode-sticky-selection
 
-This extension provides a "Sticky Selection" mode (similar to the "Region" in Emacs) that supports multiple cursors and multiple tabs.
+This extension provides a "Sticky Selection" mode (similar to the "Region" in Emacs) with support for multiple cursors and multiple tabs.
 
 ## Commands
 
@@ -8,42 +8,64 @@ This extension provides the following commands:
 
 - `sticky-selection.enterStickySelectionMode`: Enter Sticky Selection mode.
 - `sticky-selection.exitStickySelectionMode`: Exit Sticky Selection mode.
-- `sticky-selection.exitStickySelectionModeWhilePreservingSelection`: Exit Sticky Selection mode while preserving the current selection.
+- `sticky-selection.exitStickySelectionModePreserving`: Exit Sticky Selection mode while preserving the current selection.
 
 ## Keybindings
 
 This extension provides the following keybindings:
 
-| Key              | Description                                                        | OS      |
-| ---------------- | ------------------------------------------------------------------ | ------- |
-| `ctrl+space`     | Enter Sticky Selection mode.                                       |         |
-| `escape`         | Exit Sticky Selection mode if there are no multiple selections.    |         |
-| `right`          | Execute `cursorRightSelect` when in Sticky Selection mode.         |         |
-| `left`           | Execute `cursorLeftSelect` when in Sticky Selection mode.          |         |
-| `down`           | Execute `cursorDownSelect` when in Sticky Selection mode.          |         |
-| `up`             | Execute `cursorUpSelect` when in Sticky Selection mode.            |         |
-| `ctrl+f`         | Execute `cursorRightSelect` when in Sticky Selection mode.         | macOS   |
-| `ctrl+b`         | Execute `cursorLeftSelect` when in Sticky Selection mode.          | macOS   |
-| `ctrl+n`         | Execute `cursorDownSelect` when in Sticky Selection mode.          | macOS   |
-| `ctrl+p`         | Execute `cursorUpSelect` when in Sticky Selection mode.            | macOS   |
-| `end`            | Execute `cursorEndSelect` when in Sticky Selection mode.           |         |
-| `home`           | Execute `cursorHomeSelect` when in Sticky Selection mode.          |         |
-| `cmd+right`      | Execute `cursorEndSelect` when in Sticky Selection mode.           | macOS   |
-| `cmd+left`       | Execute `cursorHomeSelect` when in Sticky Selection mode.          | macOS   |
-| `ctrl+e`         | Execute `cursorLineEndSelect` when in Sticky Selection mode.       | macOS   |
-| `ctrl+a`         | Execute `cursorLineStartSelect` when in Sticky Selection mode.     | macOS   |
-| `ctrl+end`       | Execute `cursorBottomSelect` when in Sticky Selection mode.        | Windows |
-| `ctrl+home`      | Execute `cursorTopSelect` when in Sticky Selection mode.           | Windows |
-| `cmd+down`       | Execute `cursorBottomSelect` when in Sticky Selection mode.        | macOS   |
-| `cmd+up`         | Execute `cursorTopSelect` when in Sticky Selection mode.           | macOS   |
-| `pagedown`       | Execute `cursorPageDownSelect` when in Sticky Selection mode.      |         |
-| `pageup`         | Execute `cursorPageUpSelect` when in Sticky Selection mode.        |         |
-| `alt+right`      | Execute `cursorWordEndRightSelect` when in Sticky Selection mode.  | macOS   |
-| `alt+left`       | Execute `cursorWordLeftSelect` when in Sticky Selection mode.      | macOS   |
-| `ctrl+alt+right` | Execute `cursorWordPartRightSelect` when in Sticky Selection mode. | macOS   |
-| `ctrl+alt+left`  | Execute `cursorWordPartLeftSelect` when in Sticky Selection mode.  | macOS   |
+| Key          | Description                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| `ctrl+space` | Enter Sticky Selection mode.                                                                |
+| `escape`     | Exit Sticky Selection mode if there are no multiple selections created by multiple cursors. |
 
-If you're an Emacs user, you can enable `ctrl+v` and `alt+v` to work with the page-down and page-up actions by modifying your `keybindings.json` as follows:
+By default, `ctrl+space` is assigned to the `editor.action.triggerSuggest` command. To disable this default behavior, modify the `keybindings.json` file as follows:
+
+```json
+[
+  {
+    "key": "ctrl+space",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "-toggleSuggestionDetails",
+    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
+  }
+]
+```
+
+When the editor is in Sticky Selection mode, movement keys are reassigned to the `cursor*Select` commands as follows:
+
+| Key              | Description                          | OS      |
+| ---------------- | ------------------------------------ | ------- |
+| `right`          | Execute `cursorRightSelect`.         |         |
+| `left`           | Execute `cursorLeftSelect`.          |         |
+| `down`           | Execute `cursorDownSelect`.          |         |
+| `up`             | Execute `cursorUpSelect`.            |         |
+| `ctrl+f`         | Execute `cursorRightSelect`.         | macOS   |
+| `ctrl+b`         | Execute `cursorLeftSelect`.          | macOS   |
+| `ctrl+n`         | Execute `cursorDownSelect`.          | macOS   |
+| `ctrl+p`         | Execute `cursorUpSelect`.            | macOS   |
+| `end`            | Execute `cursorEndSelect`.           |         |
+| `home`           | Execute `cursorHomeSelect`.          |         |
+| `cmd+right`      | Execute `cursorEndSelect`.           | macOS   |
+| `cmd+left`       | Execute `cursorHomeSelect`.          | macOS   |
+| `ctrl+e`         | Execute `cursorLineEndSelect`.       | macOS   |
+| `ctrl+a`         | Execute `cursorLineStartSelect`.     | macOS   |
+| `ctrl+end`       | Execute `cursorBottomSelect`.        | Windows |
+| `ctrl+home`      | Execute `cursorTopSelect`.           | Windows |
+| `cmd+down`       | Execute `cursorBottomSelect`.        | macOS   |
+| `cmd+up`         | Execute `cursorTopSelect`.           | macOS   |
+| `pagedown`       | Execute `cursorPageDownSelect`.      |         |
+| `pageup`         | Execute `cursorPageUpSelect`.        |         |
+| `alt+right`      | Execute `cursorWordEndRightSelect`.  | macOS   |
+| `alt+left`       | Execute `cursorWordLeftSelect`.      | macOS   |
+| `ctrl+alt+right` | Execute `cursorWordPartRightSelect`. | macOS   |
+| `ctrl+alt+left`  | Execute `cursorWordPartLeftSelect`.  | macOS   |
+
+For Emacs users, `ctrl+v` and `alt+v` can be configured to perform the page-down and page-up actions by modifying the `keybindings.json` file as follows:
 
 ```json
 [
@@ -70,9 +92,9 @@ If you're an Emacs user, you can enable `ctrl+v` and `alt+v` to work with the pa
 ]
 ```
 
-In this way, you can also support other movement commands, including those from third-party extensions.
+In this way, other movement keys can also be supported, including those from third-party extensions.
 
-By default, Sticky Selection mode remains active even when performing actions like cut and paste. You can exit the mode after these actions by passing them as arguments to the `sticky-selection.exitStickySelectionMode` command, as shown below:
+By default, the editor does not exit Sticky Selection mode after performing actions like cut and paste. To configure the editor to exit Sticky Selection mode after these actions, pass them as arguments to the `sticky-selection.exitStickySelectionMode` command, as follows:
 
 ```json
 [
@@ -106,4 +128,4 @@ By default, Sticky Selection mode remains active even when performing actions li
 ]
 ```
 
-Similarly, you can set up other commands, such as `backspace` and `delete`, to exit Sticky Selection mode.
+Similarly, you can configure other keys, such as `backspace` and `delete`, to exit Sticky Selection mode.

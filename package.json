@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "icon": "images/icon.png",
   "displayName": "Sticky Selection",
-  "description": "\"Sticky Selection\" mode (similar to the \"Region\" in Emacs) that supports multiple cursors and multiple tabs",
+  "description": "\"Sticky Selection\" mode (similar to the \"Region\" in Emacs) with support for multiple cursors and multiple tabs",
   "license": "MIT",
   "publisher": "ksfunc",
   "repository": {
@@ -23,16 +23,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "sticky-selection.enterStickySelectionMode",
-        "title": "Enter Sticky Selection Mode"
+        "category": "Sticky Selection",
+        "title": "Enter Sticky Selection Mode",
+        "command": "sticky-selection.enterStickySelectionMode"
       },
       {
-        "command": "sticky-selection.exitStickySelectionMode",
-        "title": "Exit Sticky Selection Mode"
+        "category": "Sticky Selection",
+        "title": "Exit Sticky Selection Mode",
+        "command": "sticky-selection.exitStickySelectionMode"
       },
       {
-        "command": "sticky-selection.exitStickySelectionModeWhilePreservingSelection",
-        "title": "Exit Sticky Selection Mode while Preserving Selection"
+        "category": "Sticky Selection",
+        "title": "Exit Sticky Selection Mode while Preserving Current Selection",
+        "command": "sticky-selection.exitStickySelectionModePreserving"
       }
     ],
     "keybindings": [

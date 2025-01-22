@@ -52,7 +52,7 @@ export class Controller {
     });
   }
 
-  async exitStickySelectionModeWhilePreservingSelection(command?: Command, delay?: number) {
+  async exitStickySelectionModePreserving(command?: Command, delay?: number) {
     if (command !== undefined) {
       await command.execute();
       if (delay !== undefined && delay > 0) {

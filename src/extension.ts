@@ -29,21 +29,18 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand(
-      "sticky-selection.exitStickySelectionModeWhilePreservingSelection",
-      async (args) => {
-        const editor = vscode.window.activeTextEditor;
-        if (editor !== undefined) {
-          const controller = Controller.getOrCreate(editor.document.fileName);
-          if (args?.command !== undefined) {
-            const command = new Command(args.command, args.args);
-            await controller.exitStickySelectionModeWhilePreservingSelection(command, args.delay);
-          } else {
-            await controller.exitStickySelectionModeWhilePreservingSelection();
-          }
+    vscode.commands.registerCommand("sticky-selection.exitStickySelectionModePreserving", async (args) => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor !== undefined) {
+        const controller = Controller.getOrCreate(editor.document.fileName);
+        if (args?.command !== undefined) {
+          const command = new Command(args.command, args.args);
+          await controller.exitStickySelectionModePreserving(command, args.delay);
+        } else {
+          await controller.exitStickySelectionModePreserving();
         }
       }
-    )
+    })
   );
 
   context.subscriptions.push(
